@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Announcements — Nexora Employee Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="navbar">
+    <span class="brand">Nexora Technologies</span>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('directory') }}">Staff Directory</a>
+      <a href="{{ url_for('login') }}">Employee Login</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="hero-tag">Internal Announcements</p>
+    <h1>Announcements</h1>
+    {% for notice in notices %}
+    <div class="panel">
+      <h3 style="font-size: 1.05rem;">{{ notice.title }}</h3>
+      <p style="color: var(--text-dim); margin: 0;">{{ notice.body }}</p>
+    </div>
+    {% endfor %}
+  </main>
+</body>
+</html>

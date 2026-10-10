@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restricted Area — Nexora Employee Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="navbar">
+    <span class="brand">Nexora Technologies</span>
+    <nav><a href="{{ url_for('logout') }}">Log out</a></nav>
+  </header>
+
+  <main class="container">
+    <p class="hero-tag">Incident Response</p>
+    <h1>Restricted Files</h1>
+
+    <div class="dossier">
+      <div class="dossier-header">
+        <span class="muted">Case ref. NX-2026-0147 · Last updated by A. Morgan</span>
+        <span class="classification">Restricted</span>
+      </div>
+      <div class="dossier-body">
+        <blockquote>
+          If you found this, someone got in the way I did. The archive below
+          has what I pulled off the file server before things went quiet.
+          It's locked — you'll need to work out how I protected it.
+        </blockquote>
+
+        <div class="evidence-tag">
+          <div class="label">Recovered flag</div>
+          <div class="flag">{{ flag }}</div>
+        </div>
+
+        <p>
+          <a href="{{ url_for('download_archive', filename='incident_archive.enc') }}" class="button">
+            Download incident_archive.enc
+          </a>
+        </p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

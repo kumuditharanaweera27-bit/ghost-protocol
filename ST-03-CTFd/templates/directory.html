@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff Directory — Nexora Employee Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="navbar">
+    <span class="brand">Nexora Technologies</span>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('announcements') }}">Announcements</a>
+      <a href="{{ url_for('login') }}">Employee Login</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="hero-tag">Internal Directory</p>
+    <h1>Staff Directory</h1>
+    <div class="panel" style="padding: 0;">
+      {% for person in staff %}
+      <div style="padding: 16px 28px; border-bottom: 1px solid var(--border);">
+        <div style="display:flex; justify-content: space-between; align-items: baseline;">
+          <strong>{{ person.name }}</strong>
+          <span class="flag" style="font-size: 0.85rem; color: var(--text-dim);">{{ person.username }}</span>
+        </div>
+        <div class="muted">{{ person.dept }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+</body>
+</html>

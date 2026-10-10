@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexora Technologies — Employee Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="navbar">
+    <span class="brand">Nexora Technologies</span>
+    <nav>
+      <a href="{{ url_for('directory') }}">Staff Directory</a>
+      <a href="{{ url_for('announcements') }}">Announcements</a>
+      <a href="{{ url_for('login') }}">Employee Login</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="hero-tag">Internal Systems</p>
+    <h1>Employee Portal</h1>
+    <p class="lede">
+      Access schedules, internal announcements, and secure departmental
+      resources. This system is restricted to authorised Nexora staff.
+    </p>
+    <p class="muted">Having trouble logging in? Contact IT Support on extension 4420.</p>
+  </main>
+</body>
+</html>

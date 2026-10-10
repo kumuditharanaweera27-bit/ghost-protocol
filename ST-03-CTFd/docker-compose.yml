@@ -1,0 +1,59 @@
+services:
+  ctfd:
+    image: ctfd/ctfd:latest
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - UPLOAD_PROVIDER=filesystem
+      - DATABASE_URL=mysql+pymysql://ctfd:ctfd_password@ctfd-db/ctfd
+      - REDIS_URL=redis://ctfd-cache:6379
+      - SECRET_KEY=change_this_ctfd_secret
+    depends_on:
+      - ctfd-db
+      - ctfd-cache
+    volumes:
+      - ctfd_data:/var/uploads
+    networks:
+      - ghost_protocol_net
+
+  ctfd-db:
+    image: mariadb:10.11
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password_change_me
+      - MYSQL_USER=ctfd
+      - MYSQL_PASSWORD=ctfd_password
+      - MYSQL_DATABASE=ctfd
+    volumes:
+      - ctfd_db_data:/var/lib/mysql
+    networks:
+      - ghost_protocol_net
+
+  ctfd-cache:
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks:
+      - ghost_protocol_net
+
+  st03-web:
+    build: .
+    container_name: nexora-portal
+    restart: unless-stopped
+    environment:
+      - ST03_FLAG=NEXORA{sql1_th3_0p3n_d00r}
+    ports:
+      - "5000:5000"
+    networks:
+      - ghost_protocol_net
+
+networks:
+  ghost_protocol_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.20.0/24
+
+volumes:
+  ctfd_data:
+  ctfd_db_data:

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login — Nexora Employee Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="navbar">
+    <span class="brand">Nexora Technologies</span>
+    <nav><a href="{{ url_for('index') }}">Home</a></nav>
+  </header>
+
+  <div class="login-split">
+    <div class="login-brandside">
+      <h2>Internal access only.</h2>
+      <p>This portal connects Nexora staff to scheduling, announcements and
+         departmental resources. If you've forgotten your credentials,
+         reach out to IT Support rather than sharing your account.</p>
+    </div>
+    <div class="login-formside">
+      <h1>Log in</h1>
+      {% if error %}<p class="error">{{ error }}</p>{% endif %}
+      <!-- auth: legacy module v1.2 — flagged in last security review, rebuild pending (ticket #4471) -->
+      <form method="post" action="{{ url_for('login') }}">
+        <label>Username
+          <input type="text" name="username" autocomplete="off">
+        </label>
+        <label>Password
+          <input type="password" name="password" autocomplete="off">
+        </label>
+        <button type="submit">Log in</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

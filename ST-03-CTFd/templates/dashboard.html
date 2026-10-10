@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard — Nexora Employee Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="navbar">
+    <span class="brand">Nexora Technologies</span>
+    <nav>
+      <a href="{{ url_for('directory') }}">Staff Directory</a>
+      <a href="{{ url_for('announcements') }}">Announcements</a>
+      <a href="{{ url_for('logout') }}">Log out</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <p class="hero-tag">Dashboard</p>
+    <h1>Welcome, {{ username }}</h1>
+    <div class="panel">
+      <div class="status-line"><span class="status-dot"></span> Account active — internal user session</div>
+      {% if is_admin %}
+        <p style="margin-top: 18px;">You have elevated access. A restricted archive is available.</p>
+        <a href="{{ url_for('restricted') }}" class="button">Open Restricted Area</a>
+      {% else %}
+        <p style="margin-top: 18px; color: var(--text-dim);">No restricted resources are available for your account level.</p>
+      {% endif %}
+    </div>
+  </main>
+</body>
+</html>
