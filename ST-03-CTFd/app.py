@@ -38,7 +38,7 @@ def init_db():
         [
             ("jmorales", "autumn2025", "employee"),
             ("rchen", "nexora!23", "employee"),
-            ("admin", "N3x0ra_Adm1n_2026", "admin"),
+            ("sokonkwo", "N3x0ra_Adm1n_2026", "admin"),
         ],
     )
     conn.commit()
@@ -58,7 +58,7 @@ def directory():
         {"name": "A. Morgan", "username": "amorgan", "dept": "Security — on leave"},
         {"name": "T. Weerasinghe", "username": "tweerasinghe", "dept": "Finance"},
         {"name": "D. Oyelaran", "username": "doyelaran", "dept": "Client Services"},
-        {"name": "System Administrator", "username": "admin", "dept": "IT"},
+        {"name": "S. Okonkwo", "username": "sokonkwo", "dept": "IT"},
     ]
     return render_template("directory.html", staff=staff)
 

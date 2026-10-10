@@ -24,7 +24,6 @@
     <div class="login-formside">
       <h1>Log in</h1>
       {% if error %}<p class="error">{{ error }}</p>{% endif %}
-      <!-- auth: legacy module v1.2 — flagged in last security review, rebuild pending (ticket #4471) -->
       <form method="post" action="{{ url_for('login') }}">
         <label>Username
           <input type="text" name="username" autocomplete="off">
