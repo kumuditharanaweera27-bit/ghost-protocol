@@ -1,0 +1,13 @@
+INTERNAL - INCIDENT NOTES - ALEX MORGAN
+Nexora Technologies/ Security Operations
+
+Confirmed unauthorized access via the employee portal. Account activity doesn't match any legitimate worksloflow.
+I'm fairly confident this is lateral movement, not a one-off.
+
+I pulled a capture off the internal segment before access was cut (traffic_capture.pcap, attached seperately).
+There's a session in there that doesn't belong, worth comparing against normal baseline traffic.
+If I'm right, it'll point to which internal host they actually touched.
+
+Flag: NEXORA{nightingale_cipher}
+
+-- A.M.
