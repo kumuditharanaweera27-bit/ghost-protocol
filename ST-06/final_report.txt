@@ -1,0 +1,25 @@
+===============================================================
+ NEXORA TECHNOLOGIES — INTERNAL INCIDENT REPORT (CONFIDENTIAL)
+ Host: NEXORA-INT-01  (10.10.20.15)
+===============================================================
+
+Case: Ghost Protocol
+Analyst of record: Alex Morgan (amorgan) — STATUS: UNREACHABLE
+
+Summary
+-------
+The anomalous activity first flagged by A. Morgan has been traced
+end to end: public exposure (recon) -> a planted image -> the
+employee portal -> an encrypted archive -> captured traffic -> this
+internal host. The intrusion path is now fully reconstructed and the
+investigation is closed.
+
+You reached this file by gaining root on NEXORA-INT-01, which means
+you located and used the single configuration weakness left on this
+box. Well done.
+
+FINAL FLAG
+----------
+NEXORA{th3_l4st_sh3ll_cl0s3d}
+
+-- End of Ghost Protocol --
