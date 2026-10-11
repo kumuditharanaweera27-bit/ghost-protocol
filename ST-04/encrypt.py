@@ -4,7 +4,7 @@ import hashlib
 import os
 
 #Incident case name
-case_name = 'Nightingale'
+case_name = 'recovered_case_name'
 
 #Weak key derivation
 key = hashlib.sha256(case_name.encode()).digest()
