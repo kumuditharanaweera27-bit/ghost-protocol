@@ -14,7 +14,7 @@ RUN apt-get update && \
 RUN mkdir -p /var/run/sshd && ssh-keygen -A
 
 # Foothold account: amorgan. MUST match the password leaked in ST-05 PCAP.
-ARG AMORGAN_PASSWORD=Sunset2026!
+ARG AMORGAN_PASSWORD=Night_more_gun_44
 
 RUN useradd -m -s /bin/bash amorgan && \
     echo "amorgan:${AMORGAN_PASSWORD}" | chpasswd && \
