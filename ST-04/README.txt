@@ -1,11 +1,12 @@
-INTERNAL - RECOVERD FILES
-Nexora Technologies/ Security Operations 
+INTERNAL — RECOVERED FILES  
+Nexora Technologies | Security Operations
 
-The recoverd material was assosicated with an internal investigation referred to as 'Nightingale'
+The recovered material was associated with an internal investigation referred to as Project Nightingale.
 
-The archive was encypted before being transferred. 
-The original encryption script has been retained alongside the encrypted file for reference.
+The archive was encrypted before being transferred. The original encryption script was recovered alongside the encrypted material.
 
-The contents of the archive may contain further information related to the incident.
+Investigators suspect that a message may have been concealed within the recovered evidence. The reference to Nightingale may be relevant, but its significance remains unconfirmed.
 
--- A.M.
+Examine the available evidence carefully. The information required to continue the investigation may not be immediately visible.
+
+— A.M.
