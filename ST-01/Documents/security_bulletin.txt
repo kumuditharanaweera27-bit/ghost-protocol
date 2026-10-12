@@ -1,0 +1,4 @@
+NEXORA SECURITY BULLETIN - CONFIDENTIAL
+Author: Alex Morgan
+Flag: NEXORA{d1g1t4l_f00tpr1nts_x7Q2}
+Last upload: /assets/nexora_image.jpg

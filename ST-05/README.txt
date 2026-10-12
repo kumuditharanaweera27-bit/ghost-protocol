@@ -6,4 +6,4 @@ Analyse the traffic to identify the suspicious communication and the internal ho
 
 Evidence file `traffic_capture.pcap`
 
-Flag format `NEXORA{incident_reference_target_IP}`
+Flag format `NEXORA{Archive reference_target_IP}`

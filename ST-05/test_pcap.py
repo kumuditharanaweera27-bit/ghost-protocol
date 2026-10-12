@@ -129,6 +129,19 @@ add_tcp_flow(
 	"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nRequest completed",
 	11.0
 )
+add_tcp_flow(
+	"10.10.20.40", "10.10.20.15", 41040, 80,
+	"GET /status HTTP/1.1\r\nHost: 10.10.20.15\r\nUser-Agent: Mozilla/5.0\r\n\r\n",
+	"HTTP/1.1 200 OK\r\nContent-Type: test/plain\r\n\r\nArchive reference: OLD-7",
+	12.0
+)
+add_tcp_flow(
+	"10.10.20.60", "10.10.20.15", 41060, 80,
+	"GET /backup/index HTTP/1.1\r\nHost: 10.10.20.15\r\nUser-Agent: Mozilla/5.0\r\n\r\n",
+	"HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nArchive reference: CASE-3",
+	13.0
+)
+
 for i, packet in enumerate(packets):
 	if Ether not in packet:
 		packets[i] = Ether() / packet

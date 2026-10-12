@@ -1,37 +1,46 @@
 FROM ubuntu:22.04
 
+# Ghost Protocol — ST-06 "The Last Shell"
+# Deliberately vulnerable Linux target. ISOLATED CTF NETWORK ONLY.
+
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y \
-        openssh-server \
-        python3 \
-        sudo \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        openssh-server sudo vim less nano \
+        iproute2 iputils-ping net-tools ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /var/run/sshd && \
-    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+RUN mkdir -p /var/run/sshd && ssh-keygen -A
 
-# Low-privilege service account used for automated health checks
-RUN useradd -m -s /bin/bash svc_monitor && \
-    echo "svc_monitor:MonitorTemp#2026" | chpasswd
+# Foothold account: amorgan. MUST match the password leaked in ST-05 PCAP.
+ARG AMORGAN_PASSWORD=Night_more_gun_44
 
-# Maintenance script, intended to run as root via sudo - left world-writable (the deliberate weakness)
-COPY files/backup.sh /opt/nexora/scripts/backup.sh
-RUN chown root:root /opt/nexora/scripts/backup.sh && \
-    chmod 777 /opt/nexora/scripts/backup.sh
+RUN useradd -m -s /bin/bash amorgan && \
+    echo "amorgan:${AMORGAN_PASSWORD}" | chpasswd && \
+    useradd -m -s /bin/bash jlee && \
+    echo "jlee:$(head -c16 /dev/urandom | base64)" | chpasswd && \
+    useradd -r -s /usr/sbin/nologin svc-backup && \
+    echo "root:$(head -c16 /dev/urandom | base64)" | chpasswd
 
-# svc_monitor may run the backup script as root, no password required
-COPY files/nexora-ops.sudoers /etc/sudoers.d/nexora-ops
-RUN chmod 440 /etc/sudoers.d/nexora-ops && \
-    chown root:root /etc/sudoers.d/nexora-ops
+# THE ONE INTENDED MISCONFIGURATION (GTFOBins privesc)
+RUN echo "amorgan ALL=(root) NOPASSWD: /usr/bin/find" > /etc/sudoers.d/90-nexora && \
+    chmod 440 /etc/sudoers.d/90-nexora
 
-# Internal ops notes portal - the "one additional vulnerable service"
-RUN mkdir -p /srv/ops-portal
-COPY files/ops-notes.txt /srv/ops-portal/ops-notes.txt
+RUN mkdir -p /opt/nexora/incident
+COPY final_report.txt /opt/nexora/incident/final_report.txt
+RUN chown root:root /opt/nexora/incident/final_report.txt && \
+    chmod 600 /opt/nexora/incident/final_report.txt
 
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN mkdir -p /opt/nexora/scripts && \
+    printf '#!/bin/bash\n# nightly backup (currently disabled)\n' > /opt/nexora/scripts/backup.sh && \
+    chown root:root /opt/nexora/scripts/backup.sh && chmod 744 /opt/nexora/scripts/backup.sh && \
+    printf 'Welcome to NEXORA-INT-01\nAuthorized personnel only.\n' > /etc/motd && \
+    printf 'db_host=127.0.0.1\ndb_user=reporting\n# TODO: rotate creds (ticket NEX-1182)\n' > /home/amorgan/notes.txt && \
+    chown amorgan:amorgan /home/amorgan/notes.txt && chmod 644 /home/amorgan/notes.txt
 
-EXPOSE 22 8080
+RUN sed -i 's/#\?PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config && \
+    sed -i 's/#\?PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
-CMD ["/entrypoint.sh"]
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D", "-e"]

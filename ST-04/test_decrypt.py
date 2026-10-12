@@ -2,9 +2,10 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.primitives import padding
 import hashlib
 
-case_name = 'Nightingale'
+case_name = 'YOUR_DISCOVERED_CLUE'
 
-key = hashlib.sha256(case_name.encode()).digest()
+# TODO: Reconstruct the key derivation from the incident notes.
+key = b''
 
 with open('incident_archive.enc', 'rb') as f:
 	data = f.read()

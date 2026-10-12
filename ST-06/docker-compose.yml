@@ -1,0 +1,19 @@
+services:
+  st06-linux:
+    build: .
+    image: nexora-st06:latest
+    container_name: nexora-st06
+    hostname: NEXORA-INT-01
+    ports:
+      - "2222:22"
+    networks:
+      ctf_net:
+        ipv4_address: 10.10.20.15
+    restart: unless-stopped
+
+networks:
+  ctf_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.20.0/24
