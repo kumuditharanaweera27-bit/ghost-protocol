@@ -1,1 +1,0 @@
-svc_monitor ALL=(root) NOPASSWD: /opt/nexora/scripts/backup.sh

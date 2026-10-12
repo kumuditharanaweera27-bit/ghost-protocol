@@ -15,7 +15,8 @@ services:
     volumes:
       - ctfd_data:/var/uploads
     networks:
-      - ghost_protocol_net
+      ghost_protocol_net:
+        ipv4_address: 10.10.20.100
 
   ctfd-db:
     image: mariadb:10.11
@@ -28,13 +29,15 @@ services:
     volumes:
       - ctfd_db_data:/var/lib/mysql
     networks:
-      - ghost_protocol_net
+      ghost_protocol_net:
+        ipv4_address: 10.10.20.101
 
   ctfd-cache:
     image: redis:7-alpine
     restart: unless-stopped
     networks:
-      - ghost_protocol_net
+      ghost_protocol_net:
+        ipv4_address: 10.10.20.102
 
   st03-web:
     build: .
@@ -45,7 +48,30 @@ services:
     ports:
       - "5000:5000"
     networks:
-      - ghost_protocol_net
+      ghost_protocol_net:
+        ipv4_address: 10.10.20.103
+
+  st06-linux:
+    build: ../ST-06
+    image: nexora-st06:latest
+    container_name: nexora-st06
+    hostname: NEXORA-INT-01
+    restart: unless-stopped
+    ports:
+      - "2222:22"
+    networks:
+      ghost_protocol_net:
+        ipv4_address: 10.10.20.15
+
+  st01-recon:
+    build: ../ST-01
+    container_name: nexora-recon-site
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    networks:
+      ghost_protocol_net:
+        ipv4_address: 10.10.20.105
 
 networks:
   ghost_protocol_net:
@@ -56,4 +82,8 @@ networks:
 
 volumes:
   ctfd_data:
+    external: true
+    name: ghost-protocol-st03_ctfd_data
   ctfd_db_data:
+    external: true
+    name: ghost-protocol-st03_ctfd_db_data
