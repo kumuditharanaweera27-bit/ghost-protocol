@@ -56,4 +56,8 @@ networks:
 
 volumes:
   ctfd_data:
+    external: true
+    name: ghost-protocol-st03_ctfd_data
   ctfd_db_data:
+    external: true
+    name: ghost-protocol-st03_ctfd_db_data
